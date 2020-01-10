@@ -156,10 +156,12 @@ $ npm run dist          # 本地预览打包文件
 ├── .eslintrc.js                   # 代码检查配置文件
 ├── .gitignore                     # git忽略文件
 ├── .huskyrc                       # 阻止错误的 git 提交
+├── .npmrc                         # 项目npm配置
 ├── babel.config.js                # 代码转换规则
 ├── package.json                   # npm包描述文件
 ├── package-lock.json              # 记录当前状态下实际安装的各个npm package的具体来源和版本号
 ├── postcss.config.js              # css转换规则
+├── prettier.config.js             # 代码格式化规则
 ├── README.md                      # 项目说明
 ├── vue.config.js                  # vue-cli配置文件
 ```
@@ -176,6 +178,7 @@ $ npm run dist          # 本地预览打包文件
 1. 上线出问题后，及时用上一个镜像资源重新上线，不要回滚。
 2. 上线与上预发的打包指令存在区别。
 3. 全局安装commitzen提交代码，规范git commit message，具体参考：https://juejin.im/post/5bd2debfe51d457abc710b57
+4. 本模板使用的 vue、vuex、vue-router、axios的cdn为公共cdn，实际使用时请换成公司自己的cdn，配置路径为：vue.config.js -> chainWebpack -> cdn
 
 ### 14.其他说明
 #### 1.环境变量与模式
