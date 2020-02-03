@@ -1,7 +1,8 @@
 const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 // const WorkboxPlugin = require('workbox-webpack-plugin')
-const loading = require('./src/components/pre-render-loading')
+// const loading = require('./src/components/pre-render-loading')
+const skeleton = require('./src/components/pre-render-skeleton')
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
 // const pkg = require('./package.json')
 
@@ -34,7 +35,7 @@ module.exports = {
     })
     // 将一个使用vue编写的loading组件在webpack编译过程中将虚拟dom预渲染到html中
     config.plugin('html').tap(args => {
-      args[0].loading = loading
+      args[0].loading = skeleton
       return args
     })
     // 对于 vue、vue-router、vuex 、axios和 element-ui 等等这些不经常改动的库，
