@@ -7,7 +7,7 @@ import { rem } from '@yolkpie/utils'
 // 注册全局插件
 import '@/plugins'
 
-rem()
+rem(750) // 设计稿宽度为750
 
 Vue.config.productionTip = false
 

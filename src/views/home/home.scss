@@ -1,5 +1,6 @@
 .home {
   padding: 10px;
+  text-align: center;
 
   &__title {
     text-align: center;
@@ -7,11 +8,15 @@
   }
 
   &__feature {
-    margin-top: 10px;
+    margin: 10px 0 30px 0;
     text-align: center;
   }
 
   &__feature-item {
     margin-top: 10px;
+  }
+
+  &__link {
+    color: #2299ff;
   }
 }

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '_v/home'
 
 Vue.use(VueRouter)
 
@@ -8,7 +7,18 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    component: Home
+    meta: {
+      title: '首页'
+    },
+    component: () => import(/* webpackChunkName: "home" */ '_v/home')
+  },
+  {
+    path: '/detail',
+    name: 'detail',
+    meta: {
+      title: '详情页'
+    },
+    component: () => import(/* webpackChunkName: "detail" */ '_v/detail')
   }
 ]
 
@@ -16,6 +26,11 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || process.env.title
+  next()
 })
 
 export default router

@@ -43,7 +43,8 @@
 >* [better-scroll处理移动端滚动](https://ustbhuangyi.github.io/better-scroll/doc/zh-hans/)
 >* [postcss-pxtorem自动将px转成rem，计算规则为： 750px设计稿 -----> 7.5rem](https://github.com/cuth/postcss-pxtorem)
 >* [Commitizen规范git commit](https://juejin.im/post/5bd2debfe51d457abc710b57)
->* [抽取loading效果到html，降低首屏空白时间](https://www.jb51.net/article/146109.htm)
+>* ~~[抽取loading效果到html，降低首屏空白时间](https://www.jb51.net/article/146109.htm)（建议使用骨架屏）~~
+>* 骨架屏：目前采取的骨架屏方案为 `vue-skeleton-webpack-plugin`，支持为不同路由设置不同的骨架屏，开发模式下如果要查看骨架屏效果需要将`css.extract`设置为 true，但注意此时 css 热重载会失效，查看完毕后记得将其设置为 false
 >* 伪元素 + transform 解决Retina屏1像素问题
 >* @yolkpie/utils [前端工具类库](https://www.npmjs.com/package/@yolkpie/utils)
 

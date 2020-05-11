@@ -16,6 +16,7 @@
       <li class="home__feature-item">伪元素 + transform 解决Retina屏1像素问题</li>
       <li class="home__feature-item">@yolkpie/utils 前端工具类库</li>
     </ul>
+    <router-link class="home__link" to="/detail">Go to Detail</router-link>
   </div>
 </template>
 <script>

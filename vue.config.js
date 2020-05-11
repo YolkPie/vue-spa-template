@@ -2,9 +2,10 @@ const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 // const WorkboxPlugin = require('workbox-webpack-plugin')
 // const loading = require('./src/components/pre-render-loading')
-const skeleton = require('./src/components/pre-render-skeleton')
+// const skeleton = require('./src/components/pre-render-skeleton')
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
 const HashedModuleIdsPlugin = require('webpack/lib/HashedModuleIdsPlugin')
+const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
 // const pkg = require('./package.json')
 
 const resolvePath = dir => path.join(__dirname, dir)
@@ -21,10 +22,16 @@ module.exports = {
   publicPath: isProd ? '/' : '/',
   // 如果你不需要使用eslint，把 lintOnSave 设为false即可
   lintOnSave: true,
+  // 打包时不生成.map文件
+  productionSourceMap: false,
   // 默认情况下 babel-loader 会忽略所有 node_modules 中的文件。如果你想要通过 Babel 显式转译一个依赖，可以在这个选项中列出来。
   transpileDependencies: [
     '@yolkpie/utils'
   ],
+  // 如果要在开发环境下查看骨架屏效果，请将 extract 设置为 true，但注意此时 css 热重载会失效，查看完毕后记得将其设置为 false
+  // css: {
+  //   extract: true // 生产环境下是 true，开发环境下是 false, 提取 CSS 在开发环境模式下是默认不开启的，因为它和 CSS 热重载不兼容。
+  // },
   // 提供了一个 webpack 原始配置的上层抽象，
   // 使其可以定义具名的 loader 规则和具名插件，
   // 并有机会在后期进入这些规则并对它们的选项进行修改。
@@ -39,10 +46,10 @@ module.exports = {
       return args
     })
     // 将一个使用vue编写的loading组件在webpack编译过程中将虚拟dom预渲染到html中
-    config.plugin('html').tap(args => {
-      args[0].loading = skeleton
-      return args
-    })
+    // config.plugin('html').tap(args => {
+    //   args[0].loading = skeleton
+    //   return args
+    // })
     // 对于 vue、vue-router、vuex 、axios和 element-ui 等等这些不经常改动的库，
     // 我们让webpack不对他们进行打包，通过cdn引入，
     // 可以减少代码的大小、也可以减少服务器的带宽，更能把这些文件缓存到客户端，客户端加载的会更快。
@@ -96,6 +103,22 @@ module.exports = {
       logo: path.resolve('./public/favicon.ico'),
       suppressSuccess: true
     }))
+    config.plugins.push(new SkeletonWebpackPlugin({
+      webpackConfig: {
+        entry: {
+          app: path.join(__dirname, './src/components/skeleton/entry-skeleton.js')
+        }
+      },
+      minimize: true,
+      quiet: true,
+      router: {
+        mode: 'history',
+        routes: [
+          { path: '/', skeletonId: 'skeleton-home' },
+          { path: '/detail', skeletonId: 'skeleton-detail' }
+        ]
+      }
+    }))
     if (isProd) {
       // 构建时开启gzip，降低服务器压缩对CPU资源的占用，服务器也要相应开启gzip
       config.plugins.push(
@@ -121,8 +144,6 @@ module.exports = {
       // )
     }
   },
-  // 打包时不生成.map文件
-  productionSourceMap: false,
   devServer: {
     port: 80,
     open: true,

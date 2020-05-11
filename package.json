@@ -12,7 +12,7 @@
     "dist": "serve -s dist"
   },
   "dependencies": {
-    "@yolkpie/utils": "^1.0.2",
+    "@yolkpie/utils": "^1.0.4",
     "axios": "^0.19.0",
     "axios-retry": "^3.1.2",
     "core-js": "^3.4.3",
@@ -39,6 +39,7 @@
     "serve": "^11.2.0",
     "validate-commit-msg": "^2.14.0",
     "vue-server-renderer": "^2.6.11",
+    "vue-skeleton-webpack-plugin": "^1.2.2",
     "vue-template-compiler": "^2.6.10",
     "webpack-build-notifier": "^2.0.0"
   },
